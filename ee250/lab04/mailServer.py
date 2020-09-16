@@ -71,7 +71,13 @@ def search_mailbox_callback():
     text = request.args.get('text')
     
     if password == mailbox_password: # check if password is valid
-        response = jsonify(mailbox_manager.get_mail(field, text)) 
+    # providing an invalid key returns an Assertion Error, so try catch will fix
+    # the return message
+      try:
+         response = jsonify(mailbox_manager.get_mail(field, text))
+      
+      except Exception as e:
+         response = jsonify({'Response': 'Invalid Message Field'}) 
 
     else: # when password is not valid
         if password == None: # if there is no password, print line 
