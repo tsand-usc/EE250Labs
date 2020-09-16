@@ -20,7 +20,7 @@ class mailboxManager(object):
         try:
             with open(MAIL_DB_FILE, 'rb') as f:
                 print('Loading {}'.format(MAIL_DB_FILE))
-                # TODO: load the pickle data into self.mailbox
+                # load the pickle data into self.mailbox
                 self.mailbox = pickle.load(f)     
 
         except FileNotFoundError:
@@ -59,7 +59,7 @@ class mailboxManager(object):
 
         with open(MAIL_DB_FILE, 'wb') as f:
             print('updating database')
-            # TODO: save the mailbox data as a pickle file
+            # save the mailbox data as a pickle file
             pickle.dump(self.mailbox, f)
 
     def add_mail(self, mail_entry):
