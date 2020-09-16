@@ -66,12 +66,12 @@ def search_mailbox_callback():
     
     # Payload retrieval and password checking are taken from delete_mail_callback()
     
-    payload = request.get_json()          # get json converted payload
-    print(payload)                        # print contents
+    password = request.args.get('password')          # get json converted parameters
+    field = request.args.get('field')
+    text = request.args.get('text')
     
-    
-    if payload['password'] == mailbox_password: # check if password is valid
-        response = jsonify(mailbox_manager.get_mail(payload['field'], payload['text'])) 
+    if password == mailbox_password: # check if password is valid
+        response = jsonify(mailbox_manager.get_mail(field, text)) 
 
     else: # when password is not valid
         if password == None: # if there is no password, print line 
