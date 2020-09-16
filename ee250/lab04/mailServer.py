@@ -61,7 +61,25 @@ def get_mailbox_callback():
 # Your implementation should handle reasonable error cases as well, such as an
 # incorrect password.
 
-#def search_mailbox_callback():
+@app.route('/mailbox/search', methods=['GET'])
+def search_mailbox_callback():
+    
+    # Payload retrieval and password checking are taken from delete_mail_callback()
+    
+    payload = request.get_json()          # get json converted payload
+    print(payload)                        # print contents
+    
+    
+    if payload['password'] == mailbox_password: # check if password is valid
+        response = jsonify(mailbox_manager.get_mail(payload['field'], payload['text'])) 
+
+    else: # when password is not valid
+        if password == None: # if there is no password, print line 
+            response = jsonify({'Response': 'Missing password'})
+        else: # if the password is wrong, print line
+            response = jsonify({'Response': 'Password does not match'})
+            
+    return response
 
 
 @app.route('/mailbox/delete', methods=['DELETE'])
