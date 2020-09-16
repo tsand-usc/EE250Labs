@@ -77,7 +77,7 @@ def search_mailbox_callback():
          response = jsonify(mailbox_manager.get_mail(field, text))
       
       except Exception as e:
-         response = jsonify({'Response': 'Invalid Message Field'}) 
+         response = jsonify({'Response': 'Invalid Field'}) 
 
     else: # when password is not valid
         if password == None: # if there is no password, print line 
