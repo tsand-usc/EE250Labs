@@ -64,18 +64,18 @@ def get_mailbox_callback():
 @app.route('/mailbox/search', methods=['GET'])
 def search_mailbox_callback():
     
-    # Payload retrieval and password checking are taken from delete_mail_callback()
+    # message field retrieval and password checking are taken from get_mail_callback()
     
     password = request.args.get('password')          # get json converted parameters
     field = request.args.get('field')
     text = request.args.get('text')
     
     if password == mailbox_password: # check if password is valid
-    # providing an invalid key returns an Assertion Error, so try catch will fix
-    # the return message
+      # providing an invalid key returns an Assertion Error, so the try catch keeps
+      # the server from returning an error, now there is a clear error message.
       try:
          response = jsonify(mailbox_manager.get_mail(field, text))
-      
+ 
       except Exception as e:
          response = jsonify({'Response': 'Invalid Field'}) 
 

@@ -23,7 +23,7 @@ class mailboxManager(object):
                 # load the pickle data into self.mailbox
                 self.mailbox = pickle.load(f) 
                   
-        except EOFError:   
+        except EOFError:   # handles when the file is created but has no contents
             pass
         except FileNotFoundError:
             pass
